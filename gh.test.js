@@ -1,17 +1,16 @@
 let page;
 
-
-beforeEach(async () => {
+describe("Github page new tests", () => {
+ 
+ beforeEach(async () => {
   page = await browser.newPage();
   await page.goto("https://github.com/account/organizations/new?plan=free&ref_cta=Create%2520a%2520new%2520organization&ref_loc=bottom%2520plans&ref_page=%2Fteam");
 });
-
-afterEach(() => {
+ 
+afterEach(async () => {
   page.close();
 });
 
-
- 
 test("The first link attribute", async () => {
    
   await page.waitForSelector('a', {timeout: 2000});
@@ -44,17 +43,22 @@ test("Check if signInButton is clickable", async () => {
   expect(isClickable).toBe(true);
 });
 
-
+});
 
 
 
 describe("Github page tests", () => {
-  
+  let page;
+
   beforeEach(async () => {
     page = await browser.newPage();
     await page.goto("https://github.com/team");
   });
 
+
+  afterEach(() => {
+    page.close();
+  });
 
   test("The h1 header content'", async () => {
     const firstLink = await page.$("header div div a");
